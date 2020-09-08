@@ -14,7 +14,7 @@ router.post("/register", validateUserContent, (req, res) => {
   Users.add(user)
     .then(saved => {
       res.status(201).json({
-        saved,
+        saved
       });
     })
     .catch(error => {
@@ -34,7 +34,7 @@ router.post("/login", validateUserContent, (req, res) => {
 
         res.status(200).json({
           message: `Welcome ${user.username}!`,
-          token, //return the token upon login
+          token //return the token upon login
         });
       } else {
         res.status(401).json({ message: "Invalid Credentials" });
@@ -50,11 +50,11 @@ router.post("/login", validateUserContent, (req, res) => {
 function generateToken(user) {
   const payload = {
     subject: user.id, // standard claim = sub
-    username: user.username,
+    username: user.username
     // role: user.role || "user"  (optional: if there's role in db schema)
   };
   const options = {
-    expiresIn: "7d",
+    expiresIn: "7d"
   };
   return jwt.sign(payload, jwtSecret, options);
 }
