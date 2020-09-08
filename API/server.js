@@ -4,6 +4,7 @@ const cors = require("cors");
 
 const authRouter = require("../users/auth-router.js");
 const usersRouter = require("../users/users-router.js");
+const imageRouter = require("../imageRouter/image-router");
 const restricted = require("../middleware/restricted-middleware.js");
 
 const server = express();
@@ -14,6 +15,7 @@ server.use(cors());
 
 server.use("/api/auth", authRouter);
 server.use("/api/users", restricted, usersRouter);
+server.use("/api/images", imageRouter);
 
 server.get("/", (req, res) => {
   res.status(200).json({ api: "up" });
